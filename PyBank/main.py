@@ -1,16 +1,35 @@
 import os
 import csv
 
-cereal_csv = os.path.join("..", "Resources", "cereal_bonus.csv")
+#dictionary to hold all the data
+budget_dict = {}
+#stores overall total 
+total = 0
+#'PyBank\Resources\budget_data.csv'
+budget_csv = os.path.join("Resources", "budget_data.csv")
+budget_dict = {"month": "profit-loss"}
 
-with open(cereal_csv) as csvfile:
+with open(budget_csv) as csvfile:
     csv_reader = csv.reader(csvfile, delimiter=",")
 
-    # @NOTE: This time, we do not use `next(csv_reader)` because there is no header for this file
+    #print header
+    header = next(csv_reader)
+    print(f"header: {header}")
 
-    # Read through each row of data after the header
     for row in csv_reader:
+        total = total + int(row[1])
+        budget_dict [row]
 
-        # Convert row to float and compare to grams of fiber
-        if float(row[7]) >= 5:
-            print(row)
+print(budget_dict)
+
+
+#Calculate the net total amount of "Profit/Losses" over the entire period
+
+
+#Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
+
+
+#Calculate the greatest increase in profits (date and amount) over the entire period
+
+
+#Calculate the greatest decrease in losses (date and amount) over the entire period
