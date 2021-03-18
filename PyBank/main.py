@@ -34,12 +34,6 @@ with open(budget_csv) as csvfile:
     budget_dict = {header[0]: header[1]}
     print("the dict with only header is " + str(budget_dict) )
 
-    #for k, v in prices.items():
-    #...     prices[k] = round(v * 0.9, 2)  # Apply a 10% discount
-   
-
-    #  if arg1 == 1 and arg2 == 2
-    # thisdict["year"] = 2018
     line_count = 1
     for row in csv_reader:
         months.append(row[0])
@@ -55,8 +49,8 @@ with open(budget_csv) as csvfile:
     budget_dict[header[1]] = p_and_l
 
 #for each month in bugget_dict
-print("budget dict after for loop--------------" )
-print(budget_dict)
+#print("budget dict after for loop--------------" )
+#print(budget_dict)
 
 
 #Calculate the net total amount of "Profit/Losses" over the entire period
@@ -64,27 +58,27 @@ print(" total after "+ str(total))
 print(" line count after "+ str(line_count))
 
 #Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
-for x in pl_changes:
+""" for x in pl_changes:
     if x < 0:
-        print (x)
+        print (x) """
 
-jan = months[0]
+""" jan = months[0]
 janpl = p_and_l[0]
 feb = months[1]
 febpl = p_and_l[1]
-pl1 = int(janpl) - int(febpl) 
-print("diff in jan and feb " + str(pl1))
+pl1 = int(janpl) - int(febpl)  """
+#print("diff in jan and feb " + str(pl1))
 
 index1 = 0
 diff = 0
 pl_changes2 = []
 for x in p_and_l:
-    if index1 < len(p_and_l):
-        diff = int(p_and_l[index1]) - int(p_and_l[index1+1])
+    if index1 < len(p_and_l)-1:
+        diff = int(p_and_l[index1+1]) - int(p_and_l[index1]) 
     pl_changes2.append(diff)
     index1 += 1
-print("index1  " + index1)
-print("len(p_and_l)  " + len(p_and_l))
+print("index1  " + str(index1))
+print("len(p_and_l)  " + str(len(p_and_l)))
 #Calculate the greatest increase in profits (date and amount) over the entire period
 print( "max value  " + str(max(pl_changes2)))
 
