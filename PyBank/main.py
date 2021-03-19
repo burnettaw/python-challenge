@@ -15,7 +15,7 @@ next_month = 0
 
 #holds profit & loss changes
 pl_changes = []
-avg_pl_changes = []
+avg_pl_changes = 0.0
 months = []
 p_and_l = []
 greatest_increase_in_profits = 0.0
@@ -30,28 +30,22 @@ with open(budget_csv) as csvfile:
     #print header
     header = next(csv_reader)
     print(f"header: {header}")
-    budget_dict = {'Date': header[0]}
-    budget_dict = {'Profit/Losses': header[1]}
- 
+   
     line_count = 1
     for row in csv_reader:
         months.append(row[0])
         p_and_l.append(row[1])
         total = total + int(row[1])
-        current_month = row[1]
-        if line_count > 0 and line_count < len(row)-1 :
-            next_month =  row[1-1]
-        pl_changes.append(int(current_month) - int(next_month)) 
        
         line_count += 1
-    budget_dict[header[0]] = months
-    budget_dict[header[1]] = p_and_l
+   
 
 #Calculate the net total amount of "Profit/Losses" over the entire period
-print(" Total Months "+ str(total))
+print(" Total Value "+ str(total))
 #print(" line count after "+ str(line_count))
 
 #Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
+sum_of_diff = 0
 index1 = 0
 diff = 0
 pl_changes2 = []
@@ -59,23 +53,40 @@ for x in p_and_l:
     if index1 < len(p_and_l)-1:
         diff = int(p_and_l[index1+1]) - int(p_and_l[index1]) 
         pl_changes2.append(diff)
+        sum_of_diff += diff
     index1 += 1
-print("index1  " + str(index1))
-print("len(p_and_l)  " + str(len(p_and_l)))
+avg_pl_changes =   int(sum_of_diff) / int(index1-1)
+print("Avg = " + str(avg_pl_changes))
+print("Total Months  " + str(index1))
+greatest_increase_in_profits = 0.0
+greatest_decrease_in_losses = 0.0
+
+#print("len(p_and_l)  " + str(len(p_and_l)))
+
 #Calculate the greatest increase in profits (date and amount) over the entire period
-print( "Greatest Increase " + str(max(pl_changes2)))
-budget_dict[1] = pl_changes2
+#print( "Greatest Increase " + str(max(pl_changes2)))
+greatest_increase_in_profits = max(pl_changes2)
+find_month_index = pl_changes2.index(greatest_increase_in_profits)
+print(months[find_month_index+1])
 
-print("budget_dict[0])......")
-print(budget_dict[0])
-
-#thisdict["year"] = 2018
 #Calculate the greatest decrease in losses (date and amount) over the entire period
-print( "Greatest Decrease  " + str(min(pl_changes2)))
-print(budget_dict.keys)
-#write the results to file  .... with open(budget_csv2, "w") as output_file:
-# output_file.write(budget_dict)
-budget_csv2 = os.path.join("Resources", "output_budget_data.txt")
-with open(budget_csv2, "x" ) as output_file:
-    output_file.write(str(total))
+#print( "Greatest Decrease  " + str(min(pl_changes2)))
+greatest_decrease_in_losses = min(pl_changes2)
+
+find_month_index = pl_changes2.index(greatest_decrease_in_losses)
+
+#print(months[find_month_index+1])
+output_analysis = (
+   f"Financial Analysis\n"
+   f"----------------------------\n"
+   f"Total Months: {index1}\n"
+   f"Total: ${total}\n"
+   f"Average  Change: ${avg_pl_changes:.2f}\n"
+   f"Greatest Increase in Profits: {str(max(pl_changes2))} (${str(max(pl_changes2))})\n"
+   f"Greatest Decrease in Profits: {str(min(pl_changes2))} (${str(min(pl_changes2))})\n")
+print(output_analysis)                   
+budget_csv2 = os.path.join("Resources", "output_budget_data3.txt")
+# Export the results to text file
+with open(budget_csv2, "w") as txt_file:
+    txt_file.write(output_analysis)
 
