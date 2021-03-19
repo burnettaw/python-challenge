@@ -21,8 +21,7 @@ p_and_l = []
 greatest_increase_in_profits = 0.0
 greatest_decrease_in_losses = 0.0
 
-
-#'PyBank\Resources\budget_data.csv'
+# read the file and calculate total
 budget_csv = os.path.join("Resources", "budget_data.csv")
 
 with open(budget_csv) as csvfile:
@@ -32,8 +31,7 @@ with open(budget_csv) as csvfile:
     header = next(csv_reader)
     print(f"header: {header}")
     budget_dict = {header[0]: header[1]}
-    print("the dict with only header is " + str(budget_dict) )
-
+ 
     line_count = 1
     for row in csv_reader:
         months.append(row[0])
@@ -48,27 +46,11 @@ with open(budget_csv) as csvfile:
     budget_dict[header[0]] = months
     budget_dict[header[1]] = p_and_l
 
-#for each month in bugget_dict
-#print("budget dict after for loop--------------" )
-#print(budget_dict)
-
-
 #Calculate the net total amount of "Profit/Losses" over the entire period
 print(" total after "+ str(total))
-print(" line count after "+ str(line_count))
+#print(" line count after "+ str(line_count))
 
 #Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
-""" for x in pl_changes:
-    if x < 0:
-        print (x) """
-
-""" jan = months[0]
-janpl = p_and_l[0]
-feb = months[1]
-febpl = p_and_l[1]
-pl1 = int(janpl) - int(febpl)  """
-#print("diff in jan and feb " + str(pl1))
-
 index1 = 0
 diff = 0
 pl_changes2 = []
@@ -84,3 +66,37 @@ print( "max value  " + str(max(pl_changes2)))
 
 #Calculate the greatest decrease in losses (date and amount) over the entire period
 print( "min value  " + str(min(pl_changes2)))
+""" 
+with open('eggs.csv', 'w', newline='') as csvfile:
+    spamwriter = csv.writer(csvfile, delimiter=' ',
+                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
+    spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
+
+
+    import csv
+
+with open('names.csv', 'w', newline='') as csvfile:
+    fieldnames = ['first_name', 'last_name']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+
+    writer.writeheader()
+    writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
+    writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
+    writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
+ """
+
+#write the results to file
+budget_csv2 = os.path.join("Resources", "output_budget_data.csv")
+with open(budget_csv2, "x", newline=" " ) as csvfile:
+    csv_writer = csv_writer(csvfile, delimiter=",")
+
+    for row in csv_writer:
+        months.append(row[0])
+        p_and_l.append(row[1])
+        total = total + int(row[1])
+        current_month = row[1]
+        if line_count > 0 and line_count < len(row)-1 :
+            next_month =  row[1-1]
+        pl_changes.append(int(current_month) - int(next_month)) 
+       
+        line_count += 1
