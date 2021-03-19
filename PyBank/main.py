@@ -30,7 +30,8 @@ with open(budget_csv) as csvfile:
     #print header
     header = next(csv_reader)
     print(f"header: {header}")
-    budget_dict = {header[0]: header[1]}
+    budget_dict = {'Date': header[0]}
+    budget_dict = {'Profit/Losses': header[1]}
  
     line_count = 1
     for row in csv_reader:
@@ -47,7 +48,7 @@ with open(budget_csv) as csvfile:
     budget_dict[header[1]] = p_and_l
 
 #Calculate the net total amount of "Profit/Losses" over the entire period
-print(" total after "+ str(total))
+print(" Total Months "+ str(total))
 #print(" line count after "+ str(line_count))
 
 #Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
@@ -57,22 +58,24 @@ pl_changes2 = []
 for x in p_and_l:
     if index1 < len(p_and_l)-1:
         diff = int(p_and_l[index1+1]) - int(p_and_l[index1]) 
+        pl_changes2.append(diff)
     index1 += 1
 print("index1  " + str(index1))
 print("len(p_and_l)  " + str(len(p_and_l)))
 #Calculate the greatest increase in profits (date and amount) over the entire period
-print( "max value  " + str(max(pl_changes2)))
+print( "Greatest Increase " + str(max(pl_changes2)))
 budget_dict[1] = pl_changes2
+
+print("budget_dict[0])......")
+print(budget_dict[0])
+
 #thisdict["year"] = 2018
 #Calculate the greatest decrease in losses (date and amount) over the entire period
-print( "min value  " + str(min(pl_changes2)))
+print( "Greatest Decrease  " + str(min(pl_changes2)))
+print(budget_dict.keys)
+#write the results to file  .... with open(budget_csv2, "w") as output_file:
+# output_file.write(budget_dict)
+budget_csv2 = os.path.join("Resources", "output_budget_data.txt")
+with open(budget_csv2, "x" ) as output_file:
+    output_file.write(str(total))
 
-#write the results to file
-budget_csv2 = os.path.join("Resources", "output_budget_data.csv")
-with open(budget_csv2, "w" ) as csvfile:
-    fieldnames = ['Date', 'Profit/Losses']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    for row in budget_dict:
-        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-        writer.writerows(budget_dict)
