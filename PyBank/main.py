@@ -58,32 +58,25 @@ for x in p_and_l:
 avg_pl_changes =   int(sum_of_diff) / int(index1-1)
 print("Avg = " + str(avg_pl_changes))
 print("Total Months  " + str(index1))
-greatest_increase_in_profits = 0.0
-greatest_decrease_in_losses = 0.0
-
-#print("len(p_and_l)  " + str(len(p_and_l)))
 
 #Calculate the greatest increase in profits (date and amount) over the entire period
-#print( "Greatest Increase " + str(max(pl_changes2)))
 greatest_increase_in_profits = max(pl_changes2)
-find_month_index = pl_changes2.index(greatest_increase_in_profits)
-print(months[find_month_index+1])
+find_month_index1 = pl_changes2.index(greatest_increase_in_profits)
+
 
 #Calculate the greatest decrease in losses (date and amount) over the entire period
-#print( "Greatest Decrease  " + str(min(pl_changes2)))
 greatest_decrease_in_losses = min(pl_changes2)
+find_month_index2 = pl_changes2.index(greatest_decrease_in_losses)
 
-find_month_index = pl_changes2.index(greatest_decrease_in_losses)
-
-#print(months[find_month_index+1])
+#print(months[find_month_index2+1])
 output_analysis = (
    f"Financial Analysis\n"
    f"----------------------------\n"
    f"Total Months: {index1}\n"
    f"Total: ${total}\n"
    f"Average  Change: ${avg_pl_changes:.2f}\n"
-   f"Greatest Increase in Profits: {str(max(pl_changes2))} (${str(max(pl_changes2))})\n"
-   f"Greatest Decrease in Profits: {str(min(pl_changes2))} (${str(min(pl_changes2))})\n")
+   f"Greatest Increase in Profits: {months[find_month_index1+1]} (${str(max(pl_changes2))})\n"
+   f"Greatest Decrease in Profits: {months[find_month_index2+1]} (${str(min(pl_changes2))})\n")
 print(output_analysis)                   
 budget_csv2 = os.path.join("Resources", "output_budget_data3.txt")
 # Export the results to text file
