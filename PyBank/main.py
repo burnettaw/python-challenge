@@ -83,20 +83,34 @@ with open('names.csv', 'w', newline='') as csvfile:
     writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
     writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
     writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
- """
 
+
+    # Write updated data to csv file
+csvpath = os.path.join("output", filename)
+with open(csvpath, "w") as csvfile:
+    fieldnames = ["last_name", "first_name", "ssn", "email"]
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(new_employee_data)
+
+
+"""
+#_, filename = os.path.split(budget_csv)
+csvpath = os.path.join("Resources","budget_analysis.csv")
+with open(csvpath, 'x') as csvfile:
+    fieldnames = ["Date", "Profit/Losses"]
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
+    writer.writerows(budget_dict)
+
+ 
+"""
 #write the results to file
 budget_csv2 = os.path.join("Resources", "output_budget_data.csv")
 with open(budget_csv2, "x", newline=" " ) as csvfile:
-    csv_writer = csv_writer(csvfile, delimiter=",")
+    fieldnames = ['first_name', 'last_name']
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
     for row in csv_writer:
-        months.append(row[0])
-        p_and_l.append(row[1])
-        total = total + int(row[1])
-        current_month = row[1]
-        if line_count > 0 and line_count < len(row)-1 :
-            next_month =  row[1-1]
-        pl_changes.append(int(current_month) - int(next_month)) 
-       
-        line_count += 1
+        writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+"""
