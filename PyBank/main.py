@@ -57,60 +57,22 @@ pl_changes2 = []
 for x in p_and_l:
     if index1 < len(p_and_l)-1:
         diff = int(p_and_l[index1+1]) - int(p_and_l[index1]) 
-    pl_changes2.append(diff)
     index1 += 1
 print("index1  " + str(index1))
 print("len(p_and_l)  " + str(len(p_and_l)))
 #Calculate the greatest increase in profits (date and amount) over the entire period
 print( "max value  " + str(max(pl_changes2)))
-
+budget_dict[1] = pl_changes2
+#thisdict["year"] = 2018
 #Calculate the greatest decrease in losses (date and amount) over the entire period
 print( "min value  " + str(min(pl_changes2)))
-""" 
-with open('eggs.csv', 'w', newline='') as csvfile:
-    spamwriter = csv.writer(csvfile, delimiter=' ',
-                            quotechar='|', quoting=csv.QUOTE_MINIMAL)
-    spamwriter.writerow(['Spam'] * 5 + ['Baked Beans'])
 
-
-    import csv
-
-with open('names.csv', 'w', newline='') as csvfile:
-    fieldnames = ['first_name', 'last_name']
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-
-    writer.writeheader()
-    writer.writerow({'first_name': 'Baked', 'last_name': 'Beans'})
-    writer.writerow({'first_name': 'Lovely', 'last_name': 'Spam'})
-    writer.writerow({'first_name': 'Wonderful', 'last_name': 'Spam'})
-
-
-    # Write updated data to csv file
-csvpath = os.path.join("output", filename)
-with open(csvpath, "w") as csvfile:
-    fieldnames = ["last_name", "first_name", "ssn", "email"]
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
-    writer.writerows(new_employee_data)
-
-
-"""
-#_, filename = os.path.split(budget_csv)
-csvpath = os.path.join("Resources","budget_analysis.csv")
-with open(csvpath, 'x') as csvfile:
-    fieldnames = ["Date", "Profit/Losses"]
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    writer.writeheader()
-    writer.writerows(budget_dict)
-
- 
-"""
 #write the results to file
 budget_csv2 = os.path.join("Resources", "output_budget_data.csv")
-with open(budget_csv2, "x", newline=" " ) as csvfile:
-    fieldnames = ['first_name', 'last_name']
+with open(budget_csv2, "w" ) as csvfile:
+    fieldnames = ['Date', 'Profit/Losses']
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 
-    for row in csv_writer:
+    for row in budget_dict:
         writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-"""
+        writer.writerows(budget_dict)
