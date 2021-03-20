@@ -31,7 +31,7 @@ with open(election_csv) as csvfile:
     for row in csv_reader:
                        
         voter_id.append(row[0])
-        county.append(row[1])
+        #county.append(row[1])
         candidate.append(row[2])  
 
         #Calculate the net total amount of votes
@@ -42,10 +42,24 @@ with open(election_csv) as csvfile:
 #get unique candidate 
 unique_candidates = list(set(candidate))
 
-#count each unique candidate votes
-for n in unique_candidates:
-    unique_candidates_total.append(candidate.count(n))
 
+#count each unique candidate votes
+#match_u2 = []
+m2 = 0
+for n in unique_candidates:
+    unique_candidates_total.append(candidate.count(n)
+    #match_u2.append(n)
+    #m2 += 1
+
+# sorts values before printing
+#unique_candidates_total.sort(reverse = True)
+# match the unique candidates with its totals for prining
+"""
+match_u = []
+m = 0
+for u  in unique_candidates_total:
+    match_u[m] = u
+print(unique_candidates_total) 
 
 print("candidate 1 ")
 print (unique_candidates)
@@ -56,9 +70,7 @@ print("candidates  total")
 print(candidate.count('Khan') )
 print("each candidate  total")
 print(unique_candidates_total) 
-
-# sorts values before printing
-unique_candidates_total.sort(reverse = True)
+"""
 
 
 #prints output to screen and file 
