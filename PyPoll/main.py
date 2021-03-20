@@ -12,7 +12,9 @@ voter_id = []
 county = []
 candidate = []
 unique_candidates = []
+unique_candidates_total = []
 total_votes_cast = 0
+count_candidate = 0
 
 # read the file and calculate total
 election_csv = os.path.join("Resources", "election_data.csv")
@@ -42,18 +44,34 @@ with open(election_csv) as csvfile:
 current_candidate = ""
 next_candidate = ""
 index = 0
+""" for x in candidate:
+    current_candidate = x
+    if index < len(candidate)-1:
+        next_candidate = candidate[index + 1]
+        if  next_candidate != current_candidate:
+            unique_candidates.append(current_candidate)
+            unique_candidates_total.append(count_candidate)
+            count_candidate = 0 
+        else:
+           count_candidate += 1 """
+        
 for x in candidate:
     current_candidate = x
     if index < len(candidate)-1:
         next_candidate = candidate[index + 1]
-    elif current_candidate != next_candidate:
-        unique_candidates[index] = candidate
-        
-    index += 1
-print (unique_candidates)
+        if  candidate[index+1] != candidate[index]:
+            unique_candidates.append(current_candidate)
+            unique_candidates_total.append(count_candidate)
+            count_candidate = 0 
+        else:
+           count_candidate += 1       
+    index+=1
 
+
+print (unique_candidates[0])
+print (len(unique_candidates))
+print(unique_candidates_total[0])
 """
-
 #Calculate the greatest increase in profits (date and amount) over the entire period
 greatest_increase_in_profits = max(pl_changes2)
 #returns the index to locate month with greatest increase
