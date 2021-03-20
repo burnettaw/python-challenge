@@ -29,20 +29,16 @@ with open(budget_csv) as csvfile:
 
     #print header
     header = next(csv_reader)
-    print(f"header: {header}")
+   # print(f"header: {header}")
    
-    line_count = 1
+   
     for row in csv_reader:
         months.append(row[0])
         p_and_l.append(row[1])
-        total = total + int(row[1])
-       
-        line_count += 1
-   
 
-#Calculate the net total amount of "Profit/Losses" over the entire period
-print(" Total Value "+ str(total))
-#print(" line count after "+ str(line_count))
+        #Calculate the net total amount of "Profit/Losses" over the entire period
+        total = total + int(row[1])
+   
 
 #Calculate the changes in "Profit/Losses" over the entire period, then find the average of those changes
 sum_of_diff = 0
@@ -56,16 +52,18 @@ for x in p_and_l:
         sum_of_diff += diff
     index1 += 1
 avg_pl_changes =   int(sum_of_diff) / int(index1-1)
-print("Avg = " + str(avg_pl_changes))
-print("Total Months  " + str(index1))
+""" print("Avg = " + str(avg_pl_changes))
+print("Total Months  " + str(index1)) """
 
 #Calculate the greatest increase in profits (date and amount) over the entire period
 greatest_increase_in_profits = max(pl_changes2)
+#returns the index to locate month with greatest increase
 find_month_index1 = pl_changes2.index(greatest_increase_in_profits)
 
 
 #Calculate the greatest decrease in losses (date and amount) over the entire period
 greatest_decrease_in_losses = min(pl_changes2)
+#returns the index to locate month with greatest decrease
 find_month_index2 = pl_changes2.index(greatest_decrease_in_losses)
 
 #print(months[find_month_index2+1])
