@@ -44,14 +44,24 @@ unique_candidates = list(set(candidate))
 
 
 # count each unique candidate votes
+<<<<<<< HEAD
 for n in unique_candidates:
     unique_candidates_total.append(candidate.count(n))
     
+=======
+#match_u2 = []
+#m2 = 0
+for n in unique_candidates:
+    unique_candidates_total.append(candidate.count(n))
+    # match_u2.append(n)
+    #m2 += 1
+>>>>>>> a258aaab976352ebbe972a8fe172547b1fef8c9f
 
 # sorts values before printing
 """unique_candidates_total.sort(reverse = True)
 print(unique_candidates_total)
 # match the unique candidates with its totals for prining
+<<<<<<< HEAD
 sort_candidate_by_votes = []
 for i in unique_candidates_total
     sort_candidate_by_votes.append(i)
@@ -74,11 +84,38 @@ i = 0
 for u in unique_candidates:
     oa += f"{u}:\t {((unique_candidates_total[i]/total_votes_cast))*100:.3f}% \t {unique_candidates_total[i]}  \n"
     i += 1
+=======
+
+# prints output to screen and file
+#print("candidate 1 ")
+>>>>>>> a258aaab976352ebbe972a8fe172547b1fef8c9f
 
 print(output_analysis)
 print(oa)
 print(output_analysis2)
 
+<<<<<<< HEAD
+=======
+output_analysis = (f"Election Results\n"
+                   f"----------------------------------\n"
+                   f"Total Votes: {total_votes_cast}\n"
+                   f"----------------------------------\n")
+output_analysis2 = (
+    f"----------------------------------\n"
+    f"Winner: {unique_candidates[unique_candidates_total.index(max(unique_candidates_total))]}\n"
+    f"----------------------------------\n")
+
+oa = ""
+i = 0
+for u in unique_candidates:
+    oa += f"{u}:\t {((unique_candidates_total[i]/total_votes_cast))*100:.3f}% \t {unique_candidates_total[i]}  \n"
+    i += 1
+
+print(output_analysis)
+print(oa)
+print(output_analysis2)
+
+>>>>>>> a258aaab976352ebbe972a8fe172547b1fef8c9f
 election_csv2 = os.path.join("Analysis", "election_data3.txt")
 # Export the results to text file
 with open(election_csv2, "w") as txt_file:
